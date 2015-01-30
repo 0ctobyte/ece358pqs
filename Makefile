@@ -22,6 +22,7 @@ $(PROGRAM): $(OBJS)
 
 clean:
 	$(RM) -f $(OBJS) $(PROGRAM)
+	$(RM) -f *.png *.dot
 
 %.o: %.c Makefile
 	$(CC) $(CFLAGS) -c $< -o $@

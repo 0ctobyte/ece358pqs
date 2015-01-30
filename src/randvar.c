@@ -1,14 +1,14 @@
-#include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 
+uint32_t randvar_seed() {
+	uint32_t seed = time(0);
+	srand(seed);
+	return seed;
+}
+
 float randvar_uniform() {
-	static uint8_t is_seeded = 0;
-	if(is_seeded == 0) {
-		srand((uint32_t)time(NULL));
-		is_seeded = 1;
-	}
 	return (float)rand()/((uint32_t)RAND_MAX+1);
 }
 
