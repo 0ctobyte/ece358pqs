@@ -92,7 +92,7 @@ void test_es_pq() {
 
 	for(uint32_t i = 1; es_pq_size(pq) > 0; i++) {
 		char filename[16];
-		sprintf(filename, "pq%d.dot", i);
+		sprintf(filename, "pq%03d.dot", i);
 		es_event_t e = es_pq_dequeue(pq);
 		printf("%c_%d\n", e.event_type+0x41, e.time);
 		_test_es_pq_dot(pq, filename);

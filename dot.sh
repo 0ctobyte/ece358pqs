@@ -5,4 +5,9 @@ for i in *.${EXT}; do
 	PNG_FILES=$PNG_FILES" ${i%.${EXT}}.png"
 done
 
-open $PNG_FILES
+convert $PNG_FILES pq.pdf
+
+open pq.pdf
+
+rm *.png *dot
+
