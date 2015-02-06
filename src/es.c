@@ -38,7 +38,7 @@ struct es_pq {
 
 // Source: http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2	
 // Rounds integer to next highest power of 2
-uint32_t _es_pq_next_pow2(uint32_t num) {
+uint64_t _es_pq_next_pow2(uint64_t num) {
 	num--;
 	num |= num >> 1;
 	num |= num >> 2;
@@ -79,16 +79,15 @@ es_pq_t* es_pq_create(size_t capacity) {
 
 void es_pq_enqueue(es_pq_t *pq, es_event_t ev) {
 	// Check if events array is full, if so, double capacity
-	if(pq->size > pq->capacity) _es_pq_resize(pq, pq->capacity<<1);
+	if(pq->size >= pq->capacity) _es_pq_resize(pq, pq->capacity<<1);
 	
 	// Place the event at the end of the array
-	pq->events[pq->size+1] = ev;
-	pq->size++;
+	pq->events[++(pq->size)] = ev;
 
 	// Check if event.time is less than its parent, if so, swap
 	// Do this until event.time is greater than its parent or we have reached root	
-	for(uint32_t index = pq->size; index != ROOT; index = PARENT(index)) {
-		uint32_t parent = PARENT(index);
+	for(uint64_t index = pq->size; index != ROOT; index = PARENT(index)) {
+		uint64_t parent = PARENT(index);
 
 		// Break loop if parent.time is smaller
 		if(pq->events[index].time >= pq->events[parent].time) break;
@@ -106,20 +105,19 @@ es_event_t es_pq_dequeue(es_pq_t *pq) {
 	es_event_t ev = pq->events[ROOT];
 
 	// Replace ROOT with the event at the end of array (i.e. rightmost leaf)
-	pq->events[ROOT] = pq->events[pq->size];
-	pq->size--;
+	pq->events[ROOT] = pq->events[pq->size--];
 
 	// Check if root.time is greater than its children, if so, swap with the smaller child
 	// Do this until root.time is less than its children or root has no more children
-	for(uint32_t index = ROOT, swap_index = ROOT; HAS_CHILDREN(index, pq);  index = swap_index) {
-		uint32_t right = RIGHT(index), left = LEFT(index);
+	for(uint64_t index = ROOT, swap_index = ROOT; HAS_CHILDREN(index, pq);  index = swap_index) {
+		uint64_t right = RIGHT(index), left = LEFT(index);
 
 		// Check if root.time is greater than leftchild.time
-		swap_index = ((pq->events[index].time > pq->events[left].time) ? left : index);
+		swap_index = ((pq->events[index].time >= pq->events[left].time) ? left : index);
 
 		// Check if root.time or leftchild.time is greater than rightchild.time if the right child exists
 		if(HAS_RIGHT_CHILD(index, pq)) {
-			swap_index = ((pq->events[swap_index].time > pq->events[right].time) ? right : swap_index);
+			swap_index = ((pq->events[swap_index].time >= pq->events[right].time) ? right : swap_index);
 		}
 
 		// Break loop if the root.time is less than both of its children.time
@@ -135,7 +133,7 @@ es_event_t es_pq_dequeue(es_pq_t *pq) {
 	return ev;
 }
 
-es_event_t es_pq_at(es_pq_t* pq, uint32_t index) {
+es_event_t es_pq_at(es_pq_t* pq, uint64_t index) {
 	assert(index <= pq->size || index == 0);
 	return pq->events[index];
 }

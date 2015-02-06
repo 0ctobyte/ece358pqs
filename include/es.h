@@ -12,7 +12,7 @@ typedef enum {
 
 typedef struct es_event {
 	const es_type_t event_type;
-	const uint32_t time;
+	const double time;
 } es_event_t;
 
 typedef struct es_pq es_pq_t;
@@ -27,7 +27,7 @@ void es_pq_enqueue(es_pq_t *pq, es_event_t ev);
 es_event_t es_pq_dequeue(es_pq_t *pq);
 
 // Gets the event at index
-es_event_t es_pq_at(es_pq_t *pq, uint32_t index);
+es_event_t es_pq_at(es_pq_t *pq, uint64_t index);
 
 // Returns the number of events in the pq
 size_t es_pq_size(es_pq_t *pq);
