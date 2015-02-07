@@ -144,8 +144,8 @@ int32_t main(int32_t argc, char **argv) {
       printf("====================================================================================================\n");
    
       fprintf(f1, "%f,%f\n", inputs.rho, outputs.En);
-      fprintf(f2, "%f,%f\n", inputs.rho, outputs.pidle);
-      fprintf(f3, "%f,%f\n", inputs.rho, outputs.ploss);
+      fprintf(f2, "%f,%f\n", inputs.rho, outputs.Pidle);
+      fprintf(f3, "%f,%f\n", inputs.rho, outputs.Ploss);
 
       es_pq_delete(state.es);
     }

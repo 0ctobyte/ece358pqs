@@ -15,6 +15,8 @@ WARNFLAGS   := -Wall
 CFLAGS := -std=c99 $(BASEFLAGS) $(WARNFLAGS) $(INCLUDE)
 LDFLAGS := $(BASEFLAGS)
 
+LIBS : -lm
+
 all : $(PROGRAM)
 
 $(PROGRAM): $(OBJS)

@@ -11,8 +11,8 @@ typedef enum {
 } es_type_t;
 
 typedef struct es_event {
-	const es_type_t event_type;
-	const double time;
+	es_type_t event_type;
+	double time;
 } es_event_t;
 
 typedef struct es_pq es_pq_t;
