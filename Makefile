@@ -29,7 +29,7 @@ clean:
 %.o: %.c Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
-dist-clean:
+distclean:
 	$(RM) -f $(OBJS) $(PROGRAM)
 	$(RM) -f *.png *.dot *.pdf *.dat *.svg
 

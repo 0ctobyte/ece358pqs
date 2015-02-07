@@ -71,13 +71,13 @@ int32_t main(int32_t argc, char **argv) {
 
     parse_cmdline_args(argc, argv, &inputs);
 
-    sprintf(filename, "en_vs_rho_k%llu", inputs.K);
+    sprintf(filename, "en_vs_rho_k%llu.dat", inputs.K);
     FILE *f1 = fopen(filename, "w");
 
-    sprintf(filename, "pidle_vs_rho_k%llu", inputs.K);
+    sprintf(filename, "pidle_vs_rho_k%llu.dat", inputs.K);
     FILE *f2 = fopen(filename, "w");
 
-    sprintf(filename, "ploss_vs_rho_k%llu", inputs.K);
+    sprintf(filename, "ploss_vs_rho_k%llu.dat", inputs.K);
     FILE *f3 = fopen(filename, "w");
 
     for(; inputs.rho <= inputs.rho_end; inputs.rho += inputs.rho_step) {
