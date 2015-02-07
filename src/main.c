@@ -150,6 +150,9 @@ int32_t main(int32_t argc, char **argv) {
       es_pq_delete(state.es);
     }
 
+    fclose(f1);
+    fclose(f2);
+    fclose(f3);
 
 		return 0;
 }
