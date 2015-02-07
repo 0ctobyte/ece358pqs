@@ -12,7 +12,7 @@ figure = 0
 pylab.rc('text', usetex=True)
 pylab.rc('font', **{'family':'sans-serif','sans-serif':['Helvetica']})
 
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.25,0.95"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.25,0.95"])
 
 pylab.figure(++figure)
 pylab.clf()
@@ -34,9 +34,9 @@ pylab.xlabel(r"Utilization of the buffer")
 pylab.ylabel(r"Proportion of time the system is idle")
 pylab.savefig(filelist[1].rsplit('.',1)[0]+".svg")
 
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 5"])
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 10"])
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 40"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 5"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 10"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.5,1.5", "-k 40"])
 
 pylab.figure(++figure)
 pylab.clf()
@@ -52,9 +52,9 @@ data, label = pylab.loadtxt(filelist[9],delimiter=','), 'K=40'
 pylab.plot(data[:,0], data[:,1], label=label)
 pylab.savefig("en_vs_rho_k_finite.svg")
 
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 5"])
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 10"])
-call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 40"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 5"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 10"])
+call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 40"])
 
 pylab.figure(++figure)
 pylab.clf()
