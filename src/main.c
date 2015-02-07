@@ -47,17 +47,13 @@ void parse_cmdline_args(int32_t argc, char **argv, sim_inputs_t *args) {
           double rho = strtod(optarg, &endptr);
           if(rho != 0.0) args->rho = rho;
           if(endptr != NULL && endptr != optarg && endptr[0] == ',') {
-            double step = 0.0, end = strtod(++endptr, &endptr);
-            if(endptr != NULL && endptr != optarg && endptr[0] == ',') step = strtod(++endptr, &endptr);
-            if(step != 0.0) {
-              if(end != 0.0) args->rho_end = end;
-              args->rho_step = step;
-            }
+            double end = strtod(++endptr, &endptr);
+            if(end != 0.0) args->rho_end = end;
           }
           break;
         }
       default:
-        fprintf(stderr, "Usage: %s [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end,step]]\n", argv[0]);
+        fprintf(stderr, "Usage: %s [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end]]\n", argv[0]);
         exit(EXIT_FAILURE);
     }
   }
@@ -65,15 +61,24 @@ void parse_cmdline_args(int32_t argc, char **argv, sim_inputs_t *args) {
   args->lambda = args->rho*((double)args->C/args->L);
   args->alpha = args->lambda*5.0;
   args->rho_end = ((args->rho_end == 0.0) ? args->rho : args->rho_end);
-  args->rho_step = ((args->rho_step == 0.0) ? 0.1 : args->rho_step); 
-
+  args->rho_step = ((args->rho <= 2) ? 0.1 : ((args->rho <= 5) ? 0.2 : 0.4)); 
 }
 
 
 int32_t main(int32_t argc, char **argv) {
     sim_inputs_t inputs = INPUTS_DEFAULT;
-    
+    char filename[256];
+
     parse_cmdline_args(argc, argv, &inputs);
+
+    sprintf(filename, "en_vs_rho_k%llu", inputs.K);
+    FILE *f1 = fopen(filename, "w");
+
+    sprintf(filename, "pidle_vs_rho_k%llu", inputs.K);
+    FILE *f2 = fopen(filename, "w");
+
+    sprintf(filename, "ploss_vs_rho_k%llu", inputs.K);
+    FILE *f3 = fopen(filename, "w");
 
     for(; inputs.rho <= inputs.rho_end; inputs.rho += inputs.rho_step) {
       sim_state_t state = STATE_DEFAULT;
@@ -82,7 +87,7 @@ int32_t main(int32_t argc, char **argv) {
       inputs.lambda = inputs.rho*((double)inputs.C/inputs.L);
       inputs.alpha = inputs.lambda*5.0;
       inputs.rho_end = ((inputs.rho_end == 0.0) ? inputs.rho : inputs.rho_end);
-      inputs.rho_step = ((inputs.rho_step == 0.0) ? 0.1 : inputs.rho_step); 
+      inputs.rho_step = ((inputs.rho <= 2) ? 0.1 : ((inputs.rho <= 5) ? 0.2 : 0.4)); 
 
       printf("====================================================================================================\n");
 
@@ -137,7 +142,11 @@ int32_t main(int32_t argc, char **argv) {
           "\n\tPloss:\t%-25f (Ratio of dropped packets to total number of packets generated)\n}\n\n", outputs.En, outputs.Et, outputs.Pidle, outputs.Ploss);
 
       printf("====================================================================================================\n");
-    
+   
+      fprintf(f1, "%f,%f\n", inputs.rho, outputs.En);
+      fprintf(f2, "%f,%f\n", inputs.rho, outputs.pidle);
+      fprintf(f3, "%f,%f\n", inputs.rho, outputs.ploss);
+
       es_pq_delete(state.es);
     }
 
