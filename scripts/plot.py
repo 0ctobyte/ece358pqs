@@ -27,7 +27,7 @@ pylab.savefig(filelist[0].rsplit('.',1)[0]+".svg")
 pylab.figure(++figure)
 pylab.clf()
 data, label = pylab.loadtxt(filelist[0],delimiter=','), r'K=$\infty$'
-pylab.plot(data[:,0], data[:,1])
+pylab.plot(data[:,0], data[:,1], label=label)
 pylab.legend()
 pylab.title(r"$P_{idle}$ vs $\rho$")
 pylab.xlabel(r"Utilization of the buffer")
@@ -47,9 +47,9 @@ pylab.title(r"$E[N]$ vs $\rho$")
 pylab.xlabel(r"Utilization of the buffer")
 pylab.ylabel(r"Average \# of packets in the buffer")
 data, label = pylab.loadtxt(filelist[6],delimiter=','), 'K=10'
-pylab.plot(data[:,0], data[:,1])
+pylab.plot(data[:,0], data[:,1], label=label)
 data, label = pylab.loadtxt(filelist[9],delimiter=','), 'K=40'
-pylab.plot(data[:,0], data[:,1])
+pylab.plot(data[:,0], data[:,1], label=label)
 pylab.savefig("en_vs_rho_k_finite.svg")
 
 call(["./sim", "-t 40000", "-c 1000000", "-l 12000", "-r 0.4,10", "-k 5"])
@@ -65,8 +65,8 @@ pylab.title(r"$P_{loss}$ vs $\rho$")
 pylab.xlabel(r"Utilization of the buffer")
 pylab.ylabel(r"Packet loss ratio")
 data, label = pylab.loadtxt(filelist[8],delimiter=','), 'K=10'
-pylab.plot(data[:,0], data[:,1])
+pylab.plot(data[:,0], data[:,1], label=label)
 data, label = pylab.loadtxt(filelist[11],delimiter=','), 'K=40'
-pylab.plot(data[:,0], data[:,1])
+pylab.plot(data[:,0], data[:,1], label=label)
 pylab.savefig("ploss_vs_rho_k_finite.svg")
 
