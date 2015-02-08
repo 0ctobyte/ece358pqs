@@ -6,11 +6,11 @@ Just run `make` in the top-level directory
 ## Usage
 Usage: `./sim [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end]]`
 
-  -t (Number of seconds to run the simulation)
-  -c (The simulated link rate of the output link in bits per second)
-  -l (The average length of a packet in bits)
-  -k (The size of the simulated queue in number of packets)
-  -r (The utilization of the queue. The simulator is run for each value from `rho` through to `end`)
+- -t (Number of seconds to run the simulation)
+- -c (The simulated link rate of the output link in bits per second)
+- -l (The average length of a packet in bits)
+- -k (The size of the simulated queue in number of packets)
+- -r (The utilization of the queue. The simulator is run for each value from `rho` through to `end`)
 
 ## Code
 src/es.c        - Array (heap) based priority queue implementation
