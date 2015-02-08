@@ -11,7 +11,7 @@ void parse_cmdline_args(int32_t argc, char **argv, sim_inputs_t *args) {
   char *optstring = "t:c:l:k:r:";
   
   if(argc == 1) {
-    fprintf(stderr, "Usage: %s [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end,step]]\n", argv[0]);
+    fprintf(stderr, "Usage: %s [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end]]\n", argv[0]);
     exit(EXIT_FAILURE);
   }
 
