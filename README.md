@@ -13,11 +13,11 @@ Usage: `./sim [-t nsecs] [-c bps] [-l plength] [-k qsize] [-r rho[,end]]`
 - -r (The utilization of the queue. The simulator is run for each value from `rho` through to `end`)
 
 ## Code
-src/es.c        - Array (heap) based priority queue implementation
-src/rv.c        - Uniform and exponential distribution random variable generators
-src/sim.c       - Simulator event procedures and event generation functions
-src/main.c      - Program entry
-src/test.c      - Tests
-scripts/plot.py - Python script to generate plots of data generated from simulator
-scripts/dot.sh  - Script to generate graphical representation (using Graphviz) of the priority queue's tree structure (for testing)
+- src/es.c        - Array (heap) based priority queue implementation
+- src/rv.c        - Uniform and exponential distribution random variable generators
+- src/sim.c       - Simulator event procedures and event generation functions
+- src/main.c      - Program entry
+- src/test.c      - Tests
+- scripts/plot.py - Python script to generate plots of data generated from simulator
+- scripts/dot.sh  - Script to generate graphical representation (using Graphviz) of the priority queue's tree structure (for testing)
 
