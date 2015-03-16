@@ -10,7 +10,7 @@ INCLUDE := -Iinclude
 
 BASEFLAGS := 
 
-WARNFLAGS   := -Weverything -Werror -Wno-missing-prototypes -Wno-unused-macros -Wno-padded -Wno-bad-function-cast -Wno-unused-parameter
+WARNFLAGS   := -Weverything -Werror -Wno-missing-prototypes -Wno-unused-macros -Wno-padded -Wno-bad-function-cast -Wno-unused-parameter -Wno-format
 
 CFLAGS := -std=c99 -g $(BASEFLAGS) $(WARNFLAGS) $(INCLUDE)
 LDFLAGS := $(BASEFLAGS)
