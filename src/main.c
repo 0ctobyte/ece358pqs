@@ -15,7 +15,7 @@ void parse_cmdline_args(int32_t argc, char **argv, sim_inputs_t *args) {
     exit(EXIT_FAILURE);
   }
 
-  for(char opt = getopt(argc, argv, optstring); opt != -1; opt = getopt(argc, argv, optstring)) {
+  for(int32_t opt = getopt(argc, argv, optstring); opt != -1; opt = getopt(argc, argv, optstring)) {
     switch(opt) {
       case 't':
         {
@@ -125,8 +125,6 @@ int32_t main(int32_t argc, char **argv) {
             break;
           case OBSERVER:
             sim_event_observer(&state, &inputs, &outputs);
-            break;
-          default:
             break;
         }
       }

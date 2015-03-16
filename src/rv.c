@@ -4,8 +4,8 @@
 
 #include "rv.h"
 
-uint64_t rv_seed() {
-	uint64_t seed = time(0);
+uint32_t rv_seed() {
+	uint32_t seed = (uint32_t)time(0);
 	srand(seed);
 	return seed;
 }

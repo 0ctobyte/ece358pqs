@@ -83,7 +83,7 @@ void test_es_pq() {
 	es_pq_t *pq = es_pq_create(64);
 
 	for(double u = rv_uniform(); es_pq_size(pq) < 10; u = rv_uniform()) {
-		es_event_t e = {.event_type = (int)(u*3), .time = (int)(u*1000000)};
+		es_event_t e = {.event_type = (es_type_t)((int)(u*3)), .time = (int)(u*1000000)};
 		es_pq_enqueue(pq, e);
 	}
 	
@@ -101,10 +101,10 @@ void test_es_pq() {
 
 		double u = rv_uniform();
 		if(((uint64_t)(u*100)&0x3) == 0x3) {
-		   es_event_t e = {.event_type = (int)(u*3), .time = (int)(u*1000000)};
-		   es_pq_enqueue(pq, e);
-		   char c_e = ((e.event_type == 0) ? 'A' : ((e.event_type == 1) ? 'D' : 'O'));
-		   printf("enqueue (%c, %f)\n", c_e, e.time);
+		   es_event_t e1 = {.event_type = (es_type_t)((int)(u*3)), .time = (int)(u*1000000)};
+		   es_pq_enqueue(pq, e1);
+		   char c_e1 = ((e1.event_type == 0) ? 'A' : ((e1.event_type == 1) ? 'D' : 'O'));
+		   printf("enqueue (%c, %f)\n", c_e1, e1.time);
 		   sprintf(filename, "pq%03llu.dot", (++i));
 		   _test_es_pq_dot(pq, filename);
 		   _test_es_pq_print(pq);

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-uint64_t rv_seed(); 
+uint32_t rv_seed(); 
 double rv_uniform();
 double rv_exp(double lambda);
 

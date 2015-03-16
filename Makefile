@@ -1,4 +1,4 @@
-CC := gcc
+CC := clang 
 LD := gcc
 
 PROGRAM := sim
@@ -8,11 +8,11 @@ OBJS := $(patsubst %.c,%.o,$(C_SRCS))
 
 INCLUDE := -Iinclude
 
-BASEFLAGS := -g
+BASEFLAGS := 
 
-WARNFLAGS   := -Wall
+WARNFLAGS   := -Weverything -Werror -Wno-missing-prototypes -Wno-unused-macros -Wno-padded -Wno-bad-function-cast -Wno-unused-parameter
 
-CFLAGS := -std=c99 $(BASEFLAGS) $(WARNFLAGS) $(INCLUDE)
+CFLAGS := -std=c99 -g $(BASEFLAGS) $(WARNFLAGS) $(INCLUDE)
 LDFLAGS := $(BASEFLAGS)
 
 LIBS := -lm
