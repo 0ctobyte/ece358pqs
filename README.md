@@ -1,4 +1,6 @@
 # Discrete Event Packet Queue Simulator
+A discrete event packet queue simulator for my ECE 358 Computer Networks course. This simulator is designed to study
+the behaviour of single buffer M/M/1 queues and M/M/1/k queues with different parameters (packet length, link rate etc.).
 
 ## Build
 Just run `make` in the top-level directory
