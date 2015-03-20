@@ -1,17 +1,17 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python2.6
 
 import pylab, os
 from subprocess import call
-
-os.environ['PATH'] = os.environ['PATH'] + ':/usr/texbin'
 
 filelist = ['en_vs_rho_k0.dat', 'pidle_vs_rho_k0.dat', 'ploss_vs_rho_k0.dat', 'en_vs_rho_k5.dat', 'pidle_vs_rho_k5.dat', 'ploss_vs_rho_k5.dat', 'en_vs_rho_k10.dat', 'pidle_vs_rho_k10.dat', 'ploss_vs_rho_k10.dat', 'en_vs_rho_k40.dat', 'pidle_vs_rho_k40.dat', 'ploss_vs_rho_k40.dat']  
 
 figure = 0
 
-pylab.rc('text', usetex=True)
 pylab.rc('font', **{'family':'sans-serif','sans-serif':['Helvetica']})
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)) + "/..")
+call(["make", "distclean"])
+call(["make"])
 call(["./sim", "-t 10000", "-c 1000000", "-l 12000", "-r 0.25,0.95"])
 
 pylab.figure(++figure)
